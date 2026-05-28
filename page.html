@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Félicitations 🎉</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #a9dbee, #02a0df);
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: zoom 2s infinite alternate;
+        }
+
+        p {
+            font-size: 1.8rem;
+            max-width: 700px;
+        }
+
+        .emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: white;
+            color: #4f61ff;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.08);
+            }
+        }
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+        .content {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="images/fond1.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+
+    <h1>FÉLICITATIONS !</h1>
+   
+    <p>
+        Bravo pour ton concours !<br>
+        Tu fais maintenant parti de l'équipage de l'éducation nationale...
+    </p>
+    </div>
+    <button onclick="lancerConfettis()">
+        Relancer les confettis 🎊
+    </button>
+    <audio src="images/rick.mp4" autoplay></audio>
+    <script>
+        function lancerConfettis() {
+            confetti({
+                particleCount: 250,
+                spread: 120,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Lance automatiquement au chargement
+        lancerConfettis();
+
+        // Confettis continus pendant quelques secondes
+        let duration = 5 * 1000;
+        let animationEnd = Date.now() + duration;
+
+        (function frame() {
+            confetti({
+                particleCount: 5,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 }
+            });
+
+            confetti({
+                particleCount: 5,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 }
+            });
+
+            if (Date.now() < animationEnd) {
+                requestAnimationFrame(frame);
+            }
+        })();
+    </script>
+
+</body>
+</html>
+
